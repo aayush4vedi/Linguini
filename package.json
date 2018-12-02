@@ -1,0 +1,26 @@
+{
+  "name": "remy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "node ./app/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/speech": "^2.1.1",
+    "aws-sdk": "^2.343.0",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "bulma": "^0.7.2",
+    "express": "^4.16.4",
+    "express-formidable": "^1.2.0",
+    "ffmpeg": "0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "fs": "0.0.1-security",
+    "node-lame": "^1.2.0",
+    "pug": "^2.0.3"
+  }
+}

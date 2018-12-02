@@ -1,0 +1,34 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title MY APP
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css')
+  script(defer='' src='https://use.fontawesome.com/releases/v5.3.1/js/all.js')
+section.hero.is-primary.is-small
+  .hero-body
+    .hero-head
+      nav.navbar
+        .container
+          .navbar-brand
+            a.navbar-item
+              img(src='https://nestaway-assets.akamaized.net//assets/nestaway_bird_logo-519f459c80657464c5cb5708f3887eb2.png' alt='Logo')
+              p.title.is-3 Nestaway
+            span.navbar-burger.burger(data-target='navbarMenuHeroA')
+              span
+              span
+              span
+          #navbarMenuHeroA.navbar-menu
+            .navbar-end
+              form(action='/' method='GET')
+                button.button.is-warning(type='submit') Home
+    .container
+      .columns
+        .column.is-one-fifth
+          .columns
+            form(action='/listing' method='POST')
+              .column.is-full
+                input.input(type='text' placeholder='User-id' name='user-id')
+                p.subtitle.is-5 Enter User ID
+              .column
+                button.button.is-danger(type='submit') Submit

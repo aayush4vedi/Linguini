@@ -1,0 +1,131 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title MY APP
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css')
+  link(rel='stylesheet' href='https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css')
+  script(defer='' src='https://use.fontawesome.com/releases/v5.3.1/js/all.js')
+  script(src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js')
+
+body
+  section.hero.is-primary.is-small
+    .hero-body
+      .hero-head
+        nav.navbar
+          .container
+            .navbar-brand
+              a.navbar-item
+                img(src='https://nestaway-assets.akamaized.net//assets/nestaway_bird_logo-519f459c80657464c5cb5708f3887eb2.png' alt='Logo')
+                p.title.is-3 Nestaway
+              span.navbar-burger.burger(data-target='navbarMenuHeroA')
+                span
+                span
+                span
+            #navbarMenuHeroA.navbar-menu
+              .navbar-end
+                form(action='/' method='GET')
+                  button.button.is-warning(type='submit') Home
+
+  div.container
+    table#example.table
+      thead
+        tr
+          th
+            abbr(title='key') Key
+          th
+            abbr(title='Size') Size(Kb)
+          th
+            abbr(title='LastModified') Last Modified
+          th
+            abbr(title='Play') Play
+          //- th 
+          //-   abbr(title='Download') Download
+      tbody
+        each obj in list
+          tr
+            td= obj.Key
+            td= obj.Size/1000
+            td= obj.LastModified 
+            td
+              button.button.is-danger.download(data-id=obj.Key) Play
+            //- td
+            //-   //- button.button.is-primary.download(data-id=obj.Key) Play
+            //-   form(action='/download' method='POST')
+            //-     input(type='hidden',name='Key',value=obj.Key)
+            //-     button.button.is-primary(type='submit') Download
+      
+      div.modal#video-model
+        div.modal-background
+          div.modal-content
+            div#video(style="position:fixed;top:50%;left:50%;margin-left:-180px;margin-top:-320px;")
+            div#title(style="padding:8px;position:fixed;right:100px;top:50%;margin-top:-320px;background:white;width:20vw;height:540px;") hello
+          button.modal-close.is-large close
+  
+  script.
+    (function($){
+      $(document).ready(function(){
+        $('#example').DataTable();
+      });
+      var data =[
+        //verbs
+        'break','broke','broken','damage','damaged','repair',
+        'repaired','replace','replaced','replacement','not working','working','disconnected','block','overflow','crack',
+        'working','work','works','worked','replacement','fix','send','functioning','function',
+        //furniture & carpentry
+        'bed','cot','bedsheet','table','cupboard','curtain','rod','curtains','dining','chair','chairs','door','sofa',
+        //home accessories
+        'bathroom','mirror','brooms','bucket','mug','cloth','hanger','mat','door mat','dustbin',
+        //utility service
+        'internet','wifi','gas','pipeline',
+        //plumbing
+        'commode','flush','tank','faucet','kitchen','sink','shower','tap','basin','tank','sewage',
+        //structures
+        'wall','ceiling','floor','water','seepage',
+        //electric
+        'bulb','bulbs','light','fan','regulator','socket','sockets','tube','light','tube light','holed','electricity','power',
+        //electronic
+        'air conditioner','air','conditioner','ac','geyser','induction','stove','inverter','ups','iron','chimney','refrigerator','television','tv','washing machine',
+        //work
+        'painting','masonry','treatment','pest','mosquito','rat','termite','ants','bug','cockroach',
+        //cleaning
+        'clean','cleaning','cleaned'
+      ]
+      $(".button.download").on("click",function(){ 
+        const key = $(this).attr("data-id");
+        $("#video-model").addClass("is-active");
+        $("#video").html("<video width='360' height='640' controls  src='/download?Key="+key+"' type='video/mp4' ></video>");
+        //seek
+
+
+        let json = key.split(".");
+        json.pop();
+        json.push("json");
+        json = json.join(".");
+        $.get('/download?Key='+json).then(res=>{
+          const sentence = res.map(({word,startTime:{seconds}})=>{
+            
+            return data.filter(w=>w.toLowerCase()===word.toLowerCase())
+            .length > 0 ? "<span style='font-weight:bold;color:white;cursor:pointer;border-radius:2px;padding:2px;background:orange;' data-time='"+seconds+"' class='word'>"+word+"</span>":word;
+
+            //- return data.filter(w=>w.toLowerCase()
+            //- .includes(word.toLowerCase()))
+            //- .length > 0 ? "<span style='font-weight:bold;color:white;cursor:pointer;background:orange;' data-time='"+seconds+"' class='word'>"+word+"</span><br>":'';
+
+          }).join(" ");
+          $("#title").html(sentence);
+        });
+      });
+
+      $(document).on("click",".word",function(){
+        document.getElementsByTagName("video")[0].currentTime = parseFloat($(this).attr("data-time"));
+      });
+
+      $("#video-model .modal-close").on("click",function(){
+        $("#video").html("");
+        $("#video-model").removeClass("is-active");
+      });
+    })(jQuery);
+
+
