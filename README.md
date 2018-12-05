@@ -16,7 +16,6 @@ An admin side web-app written in NodeJS.
 # Demo
 Click [here](https://github.com/NestAway/linguini/blob/staging/demo/appDemo.mp4) for user-app demo & [here](https://github.com/NestAway/linguini/blob/staging/demo/sampeSAV.mp4) for admin's web-app demo.
 
-**Url for Staging**: `http://linguini-service.staging.k8s.nestaway.xyz:31758`
 
 <!-- Google Speech config -->
 ## Google Speech API config
