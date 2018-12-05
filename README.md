@@ -10,11 +10,11 @@ A React Native app for user.
 An admin side web-app written in NodeJS. 
 **Features:**
 - Display the list of videos of given UserID.
-- Detecting *keywords* from [dictionary.js](https://github.com/NestAway/linguini/blob/staging/app/dictionary.js) using **Google Speech API**.
+- Detecting *keywords* from [dictionary.js](https://github.com/aayush4vedi/linguini/blob/master/app/dictionary.js) using **Google Speech API**.
 - A built-in video player with *play-from* functionality for every detected keyword.
 <!-- Demo & podID -->
 # Demo
-Click [here](https://github.com/NestAway/linguini/blob/staging/demo/appDemo.mp4) for user-app demo & [here](https://github.com/NestAway/linguini/blob/staging/demo/sampeSAV.mp4) for admin's web-app demo.
+Click [here](https://github.com/aayush4vedi/linguini/blob/master/demo/appDemo.mp4) for user-app demo & [here](https://github.com/aayush4vedi/linguini/blob/master/demo/sampeSAV.mp4) for admin's web-app demo.
 
 
 <!-- Google Speech config -->
@@ -35,5 +35,5 @@ config = {
  <!-- Design  -->
 ## Design
  
-![alt text](https://github.com/NestAway/linguini/blob/staging/demo/linguiniDesign.png "linguini system desing")    
-Read the attached [doc](https://github.com/NestAway/linguini/blob/staging/demo/linguiniDoc.pdf) for details.
+![alt text](https://github.com/aayush4vedi/linguini/blob/master/demo/linguiniDesign.png "linguini system desing")    
+Read the attached [doc](https://github.com/aayush4vedi/linguini/blob/master/demo/linguiniDoc.pdf) for details.
